@@ -1,4 +1,4 @@
-import { YER_EKLE } from '../actions/types';
+import { YER_EKLE, YER_SIL } from '../actions/types';
 
 const initialState = {
     yerAdi: '',
@@ -14,6 +14,11 @@ const yerReducer = (state = initialState, action) => {
                     key: Math.random(),
                     value: action.payload
                 })
+            };
+        case YER_SIL:
+            return {
+                ...state,
+                yerler: state.yerler.slice(0, -1)
             };
         default:
             return state;

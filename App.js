@@ -4,7 +4,7 @@ import { StyleSheet, View, TextInput, Button, FlatList, Text } from 'react-nativ
 
 //Redux
 import { connect } from 'react-redux';
-import { yerEkle } from './src/redux/actions/yer';
+import { yerEkle, yerSil } from './src/redux/actions/yer';
 
 class App extends Component {
 
@@ -21,6 +21,12 @@ class App extends Component {
     }
     //console.log(this.props);  
     this.props.ekle(this.state.yerAdi);
+  }
+
+  itemDeleted = () => {
+    if (this.props.listData.length > 0) {
+      this.props.sil();
+    }
   }
 
   textChanged = (value) => {
@@ -54,6 +60,11 @@ class App extends Component {
             style={styles.ekleButton}
             onPress={this.buttonClicked}
           />
+          <Button 
+            title="Sil"
+            style={styles.ekleButton}
+            onPress={this.itemDeleted}
+          />
         </View>
         <View style={styles.listStyle}>
           {this.renderList()}
@@ -77,17 +88,17 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   yerInput: {
-    width: '70%'
+    width: '50%'
   },
   ekleButton: {
-    width: '30%'
+    width: '25%'
   },
   listStyle: {
     width: '100%'
   }
 });
 
-const mapStateToProps = state => {
+const StateleriPropsaAta = state => {
   console.log('mapStateToProps');
   console.log(state);
   return {
@@ -95,14 +106,17 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const FonksiyonlariPropsaAta = dispatch => {
   //console.log('mapDispatchToProps');
   //console.log(dispatch);
   return {
     ekle: (yerAdi) => {
       dispatch(yerEkle(yerAdi));
+    },
+    sil: () => {
+      dispatch(yerSil());
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(StateleriPropsaAta, FonksiyonlariPropsaAta)(App);
