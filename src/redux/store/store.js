@@ -2,7 +2,7 @@ import { createStore, combineReducers } from 'redux';
 import yerReducer from '../reducers/yerReducer';
 
 const rootReducer = combineReducers({
-    yerler: yerReducer
+    tumYerler: yerReducer
 });
 
 const configureStore = () => createStore(rootReducer);

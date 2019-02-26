@@ -14,11 +14,13 @@ class App extends Component {
   }
 
   buttonClicked = () => {
-    console.log('buttonClicked');
+    //console.log('buttonClicked');
+    //console.log(this.state.yerAdi);
     if (this.state.yerAdi.trim() === '') {
       return;
     }
-    this.props.add(this.state.yerAdi);
+    //console.log(this.props);  
+    this.props.ekle(this.state.yerAdi);
   }
 
   textChanged = (value) => {
@@ -27,11 +29,11 @@ class App extends Component {
     });
   }
 
-  renderLis() {
+  renderList() {
     return (
       <FlatList 
         style={styles.listStyle}
-        data={this.props.yerler}
+        data={this.props.listData}
         keyExtractor={(item, index) => index.toString()}
         renderItem={data => (<Text>{data.item.value}</Text>)}
       />
@@ -89,13 +91,13 @@ const mapStateToProps = state => {
   console.log('mapStateToProps');
   console.log(state);
   return {
-    yerler: state.yerler.yerler
+    listData: state.tumYerler.yerler
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  console.log('mapDispatchToProps');
-  console.log(dispatch);
+  //console.log('mapDispatchToProps');
+  //console.log(dispatch);
   return {
     ekle: (yerAdi) => {
       dispatch(yerEkle(yerAdi));
